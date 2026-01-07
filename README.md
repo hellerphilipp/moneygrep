@@ -27,6 +27,11 @@ This tool was birthed through a high-bandwidth collaborative session between a h
 
 **It works, and it is amazing.** It solves the monthly "export-to-uniform-CSV" headache using the power of the Unix philosophy.
 
+### TODO list
+- add "balance after transaction" field to identify already imported transactions
+- add timestamps to dates
+- implement some expense categorization logic
+
 ---
 
 ## Project Structure
