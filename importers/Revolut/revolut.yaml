@@ -1,0 +1,19 @@
+# Importer configuration for Revolut
+
+header_lines: 1
+transformations:
+  # 1. Date: Extracts 'Started Date' (Col 3) and keeps only the YYYY-MM-DD part
+  date: "cut -d',' -f3 | cut -d' ' -f1"
+
+  # 2. Description: Extracts 'Description' (Col 5)
+  description: "cut -d',' -f5"
+
+  # 3. Original Value: Extracts 'Amount' (Col 6)
+  original_value: "cut -d',' -f6"
+
+  # 4. Original Currency: Extracts 'Currency' (Col 8)
+  original_currency: "cut -d',' -f8"
+
+  # 5. Value in Account Currency: Same as Amount for single-currency accounts
+  # If you use Revolut for multi-currency, this assumes the CSV is for the account's base currency.
+  value_in_account_currency: "cut -d',' -f6"
