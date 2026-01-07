@@ -1,4 +1,4 @@
-# Expense Manager V0
+# MoneyGrep
 
 A terminal-based tool to import and standardize bank transaction CSVs into an SQLite database. It uses YAML configuration files to map CSV columns to database fields using standard shell commands (like `cut`, `awk`, or `sed`).
 
@@ -29,7 +29,7 @@ This tool was birthed through a high-bandwidth collaborative session between a h
 ## Project Structure
 
 ```text
-expense_manager/
+money_grep/
 ├── expense.db              # SQLite Database (auto-generated)
 ├── main.py                 # CLI Entrypoint
 ├── db.py                   # DB Config

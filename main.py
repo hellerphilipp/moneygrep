@@ -176,7 +176,15 @@ def main():
     ensure_directories()
 
     while True:
-        print_header("Expense Manager V0")
+        print(r"""
+  __  __                       _____                     
+ |  \/  |                     / ____|                    
+ | \  / | ___  _ __   ___ _ _| |  __ _ __ ___ _ __      
+ | |\/| |/ _ \| '_ \ / _ \ ' \ | |_ | '__/ _ \ '_ \     
+ | |  | | (_) | | | |  __/ | | |__| | | |  __/ |_) |    
+ |_|  |_|\___/|_| |_|\___|_|  \_____|_|  \___| .__/     
+                MoneyGrep v0                | |        
+                                            |_|        """)
         print("1. Select Account / Import")
         print("2. Create New Account")
         print("3. Exit")
