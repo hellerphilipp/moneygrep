@@ -2,6 +2,30 @@
 
 A terminal-based tool to import and standardize bank transaction CSVs into an SQLite database. It uses YAML configuration files to map CSV columns to database fields using standard shell commands (like `cut`, `awk`, or `sed`).
 
+**⚠️ WARNING: THIS PROJECT WAS FULLY VIBE-CODED TO A WORKING STATE IN MINUTES.**
+
+This tool was birthed through a high-bandwidth collaborative session between a human (me) and Gemini. It is the definition of "it works on my machine" and "I'll refactor it later (maybe)". Still decided it's worth sharing!
+
+### The Vibe I gave as context to Gemini
+
+* **Speed over perfection**: Architecture was decided in minutes based on previous projects I completed
+* **Shell-Powered**: Why write complex Python parsers when `cut`, `awk`, and `sed` exist?
+* **SQLite + SQLAlchemy**: Proper data integrity, but zero configuration overhead
+* **Alembic migrations**: Because even vibe-coded projects deserve a path forward
+
+### Known Gaps
+
+* **Performance**: Every CSV row triggers multiple subprocess calls. If you import 10,000 rows, go make some coffee
+* **Error Handling**: We assume your CSVs aren't actively trying to break us
+* **UI**: It's a terminal menu. Use your number keys and your imagination
+* **Data formats**: Room for optimization ;)
+
+### The Verdict
+
+**It works, and it is amazing.** It solves the monthly "export-to-uniform-CSV" headache using the power of the Unix philosophy.
+
+---
+
 ## Project Structure
 
 ```text
