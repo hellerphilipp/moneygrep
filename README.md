@@ -2,6 +2,9 @@
 
 A terminal-based tool to import and standardize bank transaction CSVs into an SQLite database. It uses YAML configuration files to map CSV columns to database fields using standard shell commands (like `cut`, `awk`, or `sed`).
 
+![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+![Python: 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)
+
 **⚠️ WARNING: THIS PROJECT WAS FULLY VIBE-CODED TO A WORKING STATE IN MINUTES.**
 
 This tool was birthed through a high-bandwidth collaborative session between a human (me) and Gemini. It is the definition of "it works on my machine" and "I'll refactor it later (maybe)". Still decided it's worth sharing!
