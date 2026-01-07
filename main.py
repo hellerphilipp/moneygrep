@@ -174,8 +174,6 @@ def run_importer_wizard(session, account):
 
 def main():
     ensure_directories()
-    # For V0, we auto-create tables if they don't exist (simpler than running alembic immediately)
-    Base.metadata.create_all(engine)
 
     while True:
         print_header("Expense Manager V0")

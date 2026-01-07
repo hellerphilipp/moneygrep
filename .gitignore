@@ -1,5 +1,4 @@
 expense.db
-alembic/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
