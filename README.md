@@ -31,6 +31,9 @@ This tool was birthed through a high-bandwidth collaborative session between a h
 - add "balance after transaction" field to identify already imported transactions
 - add timestamps to dates
 - implement some expense categorization logic
+- CLI arguments for skipping the menu
+- support for preprocessing steps to support non-csv formats
+- optional: TUI
 
 ---
 
