@@ -1,0 +1,17 @@
+header_lines: 1
+transformations:
+  # The 'date' field in DB needs a string
+  # Command: cut by semicolon, take 1st field
+  date: "cut -d';' -f1"
+
+  # Description: cut 2nd field, remove quotes
+  description: "cut -d';' -f2 | tr -d '\"'"
+
+  # Original Value: cut 3rd field
+  original_value: "cut -d';' -f3"
+
+  # Original Currency: cut 4th field
+  original_currency: "cut -d';' -f4"
+
+  # Account Value: In this case, same as original
+  value_in_account_currency: "cut -d';' -f3"
