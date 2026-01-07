@@ -1,0 +1,80 @@
+# Expense Manager V0
+
+A terminal-based tool to import and standardize bank transaction CSVs into an SQLite database. It uses YAML configuration files to map CSV columns to database fields using standard shell commands (like `cut`, `awk`, or `sed`).
+
+## Project Structure
+
+```text
+expense_manager/
+├── expense.db              # SQLite Database (auto-generated)
+├── main.py                 # CLI Entrypoint
+├── db.py                   # DB Config
+├── models/                 # SQLAlchemy Models
+├── importers/              # YAML rules per account
+└── requirements.txt        # Dependencies
+
+```
+
+## Setup
+
+1. **Install Dependencies**
+```bash
+pip install sqlalchemy alembic pyyaml
+
+```
+
+
+2. **Run the Tool**
+The database tables are created automatically on the first run.
+```bash
+python main.py
+
+```
+
+
+
+## Workflow
+
+1. **Create an Account:**
+Select Option 2 in the main menu. Give it a name (e.g., `MyBank`) and currency (e.g., `EUR`).
+2. **Create an Importer Rule:**
+The tool creates a folder at `importers/MyBank/`. Create a `.yaml` file inside that folder (e.g., `default.yaml`) to define how to read your bank's CSV.
+3. **Import Data:**
+Select Option 1 in the main menu, choose your account, select the YAML file, and paste the path to your CSV.
+
+## Configuration (YAML)
+
+Importers define how to transform a single line of your CSV into database fields using terminal commands.
+
+**Example `importers/MyBank/default.yaml`:**
+
+```yaml
+# Number of lines to skip at the top of the CSV
+header_lines: 1
+
+transformations:
+  # Commands receive the CSV line via stdin.
+  # Example CSV Line: 2023-10-01;"UBER";-25.50;EUR
+  
+  # Extract date (e.g., cut first column by semicolon)
+  date: "cut -d';' -f1"
+  
+  # Extract description and remove quotes
+  description: "cut -d';' -f2 | tr -d '\"'"
+  
+  # Extract amount
+  original_value: "cut -d';' -f3"
+  
+  # Extract currency code
+  original_currency: "cut -d';' -f4"
+  
+  # Value converted to account currency (usually same as original for simple imports)
+  value_in_account_currency: "cut -d';' -f3"
+
+```
+
+## Notes
+
+* **Database:** Stored locally as `expense.db`.
+* **Shell Commands:** The script pipes CSV lines to the commands defined in YAML. Ensure you are on a system that supports these commands (Linux/macOS, or WSL/Git Bash on Windows).
+
