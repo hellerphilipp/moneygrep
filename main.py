@@ -134,7 +134,7 @@ def run_importer_wizard(session, account):
             date_str = run_shell_transform(transformations['date'], line)
 
             # Basic Validation
-            if not all([desc, orig_val, orig_curr, acc_val]):
+            if not all([desc, orig_val, orig_curr, acc_val, date_str]):
                 print(f"Skipping line {i+header_lines+1}: Transformation returned empty values.")
                 continue
 

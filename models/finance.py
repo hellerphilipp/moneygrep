@@ -16,12 +16,16 @@ class Account(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(50), unique=True)
-    currency: Mapped[Currency] = mapped_column(SqlEnum(Currency))
+    
+    # native_enum=False forces SQLite to store this as a simple VARCHAR
+    currency: Mapped[Currency] = mapped_column(SqlEnum(Currency, native_enum=False))
     
     transactions: Mapped[List["Transaction"]] = relationship(back_populates="account")
 
     def __repr__(self):
-        return f"<Account {self.name} ({self.currency.value})>"
+        # Safety check in case currency is accessed before commit
+        curr = self.currency.value if hasattr(self.currency, 'value') else self.currency
+        return f"<Account {self.name} ({curr})>"
 
 class Transaction(Base):
     __tablename__ = "transactions"
@@ -31,13 +35,12 @@ class Transaction(Base):
     
     description: Mapped[str] = mapped_column(String(255))
     
-    # We store money as Numeric for precision, not Float
     original_value: Mapped[float] = mapped_column(Numeric(10, 2))
-    original_currency: Mapped[Currency] = mapped_column(SqlEnum(Currency))
+    
+    # native_enum=False here as well
+    original_currency: Mapped[Currency] = mapped_column(SqlEnum(Currency, native_enum=False))
     
     value_in_account_currency: Mapped[float] = mapped_column(Numeric(10, 2))
-    
-    # Note: Added date because an expense tracker needs it, even if not explicitly requested
     date_str: Mapped[str] = mapped_column(String(20)) 
 
     account: Mapped["Account"] = relationship(back_populates="transactions")
