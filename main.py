@@ -9,6 +9,14 @@ from db import get_db_session, engine
 from models.base import Base
 from models.finance import Account, Transaction, Currency
 
+def show_license_info():
+    print_header("Legal Information")
+    print("This program comes with ABSOLUTELY NO WARRANTY.")
+    print("This is free software, and you are welcome to redistribute it")
+    print("under certain conditions (GNU GPL v3).")
+    print("\nFor the full license, see the LICENSE.md file in the root directory.")
+    get_input("\nPress Enter to return to menu")
+
 # --- Utilities ---
 
 def ensure_directories():
@@ -185,9 +193,17 @@ def main():
  |_|  |_|\___/|_| |_|\___|_|  \_____|_|  \___| .__/     
                 MoneyGrep v0                | |        
                                             |_|        """)
+        
+        # The GPL-required startup notice (brief version)
+        print(f"Copyright (C) 2026 Philipp Heller")
+        print("MoneyGrep comes with ABSOLUTELY NO WARRANTY. This is free software.")
+        print("Type '9' for license details.")
+        print("-" * 30)
+
         print("1. Select Account / Import")
         print("2. Create New Account")
-        print("3. Exit")
+        print("9. Show License & Warranty")
+        print("0. Exit")
         
         choice = get_input("Choice")
 
@@ -198,7 +214,9 @@ def main():
                     run_importer_wizard(session, acc)
             elif choice == '2':
                 create_account(session)
-            elif choice == '3':
+            elif choice == '9':
+                show_license_info()
+            elif choice == '0':
                 sys.exit()
             else:
                 print("Invalid choice")
