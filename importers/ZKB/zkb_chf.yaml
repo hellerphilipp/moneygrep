@@ -1,0 +1,20 @@
+# Importer configuration for Zürcher Kantonalbank (ZKB)
+
+header_lines: 1
+transformations:
+  # 1. Date: Convert DD.MM.YYYY to YYYY-MM-DD
+  # We split by '.' and rearrange fields
+  date: "cut -d';' -f1 | tr -d '\"' | awk -F. '{print $3\"-\"$2\"-\"$1}'"
+
+  # 2. Description: Column 2 (Booking text)
+  description: "cut -d';' -f2 | tr -d '\"'"
+
+  # 3. Original Value: This is the tricky part. 
+  # Column 7 is Debit, Column 8 is Credit (use first non-empty)
+  original_value: "awk -F';' '{gsub(/\"/, \"\", $7); gsub(/\"/, \"\", $8); if ($7 != \"\") print \"-\"$7; else print $8}'"
+
+  # We can hardcode this return if the column is empty in the CSV
+  original_currency: "echo 'CHF'"
+
+  # 5. Value in Account Currency: Same logic as original value for ZKB
+  value_in_account_currency: "awk -F';' '{gsub(/\"/, \"\", $7); gsub(/\"/, \"\", $8); if ($7 != \"\") print \"-\"$7; else print $8}'"
